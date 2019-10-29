@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "235248643833",
+    "firebase_url": "https://ampshoppingmall.firebaseio.com",
+    "project_id": "ampshoppingmall",
+    "storage_bucket": "ampshoppingmall.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235248643833:android:45c806a80f2dbb5da27c28",
+        "android_client_info": {
+          "package_name": "com.hansung.amp_shoppingmall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235248643833-vsli1su5tmvvll4lucbvh2jqneogo1fn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hansung.amp_shoppingmall",
+            "certificate_hash": "15dec7531836c22d9f6fbf3caf6b392b72ee0e0a"
+          }
+        },
+        {
+          "client_id": "235248643833-vsg7f5obf9jdcj7n2h9lr1m1vn4ohutm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCumLZh_wuzwUPTs8VajtfG76AODX1CJs4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235248643833-vsg7f5obf9jdcj7n2h9lr1m1vn4ohutm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
