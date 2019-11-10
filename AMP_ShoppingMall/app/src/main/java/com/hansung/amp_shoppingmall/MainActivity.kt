@@ -12,6 +12,10 @@ class MainActivity : AppCompatActivity() {
     val mRootRef = FirebaseDatabase.getInstance().getReference();
     val mConditionRef = mRootRef.child("condition");
 
+
+    var itemRootRef = mRootRef.child("items");
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
