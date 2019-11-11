@@ -1,23 +1,46 @@
 package com.hansung.amp_shoppingmall
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import android.os.Bundle
+
+import kotlinx.android.synthetic.main.activity_main.*
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.util.Log
+<<<<<<< HEAD
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.google.firebase.database.*
 import com.hansung.amp_shoppingmall.detail.Item
 import kotlinx.android.synthetic.main.activity_main.*
+=======
+import android.widget.ListView
+import com.google.firebase.database.*
+import com.hansung.amp_shoppingmall.detail.Item
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
+
+>>>>>>> 0f6ef1ea7c195ec516cd726e018afd23ac1e8d1b
 
 import java.util.ArrayList
 import java.util.Arrays
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var mDatabase: FirebaseDatabase
+    private lateinit var mItemReference : DatabaseReference
+    private lateinit var mChild: ChildEventListener
 
+<<<<<<< HEAD
 
     private var adapter: RecyclerAdapter = RecyclerAdapter()
     private lateinit var mDatabase: FirebaseDatabase
@@ -34,6 +57,17 @@ class MainActivity : AppCompatActivity() {
         recyclerView.setLayoutManager(linearLayoutManager)
 
         val postListener = object : ValueEventListener {
+=======
+    private lateinit var listView: ListView
+    private lateinit var adapter: ArrayAdapter<String>
+    var itemList = arrayListOf<Item>()
+
+    private fun initDatabase() {
+        mDatabase = FirebaseDatabase.getInstance()
+        mItemReference = mDatabase.getReference("category")
+
+        mItemReference.addValueEventListener(object : ValueEventListener {
+>>>>>>> 0f6ef1ea7c195ec516cd726e018afd23ac1e8d1b
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 for(category:DataSnapshot in dataSnapshot.getChildren()){
@@ -47,10 +81,16 @@ class MainActivity : AppCompatActivity() {
                     val stock = category.child("stock").getValue().toString()
 
                     itemList.add(Item(productName, name, price, bigClass, smallClass, stock))
+<<<<<<< HEAD
                     // Item (val itemName: , val itemPrice: , val itemBigClass: , val itemSmallClass: ,  val itemStock: )
                     adapter!!.addItem(Item(productName, name, price, bigClass, smallClass, stock))
                 }
                 adapter!!.notifyDataSetChanged()
+=======
+                // Item (val itemName: , val itemPrice: , val itemBigClass: , val itemSmallClass: ,  val itemStock: )
+                }
+
+>>>>>>> 0f6ef1ea7c195ec516cd726e018afd23ac1e8d1b
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -59,6 +99,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+<<<<<<< HEAD
         mItemReference.addValueEventListener(postListener)
         recyclerView.setAdapter(adapter)
     }
@@ -119,5 +160,33 @@ class MainActivity : AppCompatActivity() {
 
 
         }
+=======
+        })
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        /*nextBtn.setOnClickListener{
+            val nextIntent = Intent(this, DetailActivity::class.java)
+            nextIntent.putExtra("itemId", "outer1")
+            startActivity(nextIntent)
+        }*/
+
+        initDatabase()
+        Log.e("ahn", "start")
+        /*for(i:Item in itemList){
+            Log.e("ahn", "main ItemList : ${i.productName}, ${i.itemStock}")
+            println("main ItemList : ${i.productName}, ${i.itemStock}")
+        }*/
+
+        for(i:String in arrayList){
+            Log.e("ahn", "main arrayList ${i.toString()}, $i")
+        }
+        Log.e("ahn", "end")
+>>>>>>> 0f6ef1ea7c195ec516cd726e018afd23ac1e8d1b
+    }
+
+
 }

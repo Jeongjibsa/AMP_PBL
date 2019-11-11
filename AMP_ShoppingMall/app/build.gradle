@@ -25,7 +25,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -41,6 +41,9 @@ dependencies {
 
 apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
 
+<<<<<<< HEAD
 androidExtensions {
     experimental = true
 }
+=======
+>>>>>>> 0f6ef1ea7c195ec516cd726e018afd23ac1e8d1b
