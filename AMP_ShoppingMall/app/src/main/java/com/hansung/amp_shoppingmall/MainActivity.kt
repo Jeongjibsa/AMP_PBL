@@ -1,5 +1,7 @@
 package com.hansung.amp_shoppingmall
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -7,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Adapter
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.database.*
 import com.hansung.amp_shoppingmall.detail.Item
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,8 +26,9 @@ class MainActivity : AppCompatActivity() {
     private var adapter: RecyclerAdapter = RecyclerAdapter()
     private lateinit var mDatabase: FirebaseDatabase
     private lateinit var mItemReference : DatabaseReference
- /*   private val mRootRef = FirebaseDatabase.getInstance().getReference();
-    private val mCategoryRef = mRootRef.child("category");*/
+    private var context : Context = this
+    private lateinit var searchClickListener: SearchClickListener
+
     var itemList = arrayListOf<Item>()
 
     private fun initDatabase() {
@@ -62,48 +67,25 @@ class MainActivity : AppCompatActivity() {
         mItemReference.addValueEventListener(postListener)
         recyclerView.setAdapter(adapter)
     }
-    /*private fun init() { //파이어 베이스에서 이미지와 데이터를 가져와 Data클래스로 변환후 arraylist에 추가
-
-        val linearLayoutManager = LinearLayoutManager(this)
-        recyclerView.setLayoutManager(linearLayoutManager)
-
-        val postListener = object: ValueEventListener{
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                //val post = dataSnapshot.getValue(Post::class.java)
-                for(messageData: DataSnapshot in dataSnapshot.children){
-                    Log.e("test","parent"+dataSnapshot.key.toString()+",||||||||||||||||||||||child : "+messageData.getValue().toString())
-
-                }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-
-
-            }
-        }
-        mCategoryRef.addValueEventListener(postListener)
-        recyclerView.setAdapter(adapter)
-
-    }*/
-
-
-    ////////////////////////////////////////////////////////////////
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        searchButton
-        searchView
+        /*searchButton
+        searchView*/
 
-        val searchClickListener = SearchClickListener()
+        searchClickListener = SearchClickListener()
         searchButton!!.setOnClickListener(searchClickListener)
 
-        initDatabase()
+        initDatabase()  // arraylist에 데이터를 넣고 리사이클러 어댑터를 초기화 한다.
 
-        //getData()
-
+        categoryButton.setOnClickListener {
+            val nextIntent = Intent(this, CategoryActivity::class.java)
+            nextIntent.putExtra("itemList", itemList)
+            startActivity(nextIntent)
+        }
     }
 
 
@@ -114,10 +96,24 @@ class MainActivity : AppCompatActivity() {
 
     private inner class SearchClickListener : View.OnClickListener {
         override fun onClick(v: View) {
-            val searchMessage = searchView!!.getText().toString()
-            //검색버튼 클릭시 해당 이름으로 리스트 뷰 를 작성
+            val searchMessage = searchView!!.text.toString()
+            //var searchedList = ArrayList<Item>()
+            var flag:Boolean = false;
+            var tempAdapter:RecyclerAdapter = RecyclerAdapter()
+            for(searchedItem:Item in itemList){
 
+                if(searchedItem.itemName.equals(searchMessage) || searchedItem.itemBigClass.equals(searchMessage) || searchedItem.itemSmallClass.equals(searchMessage) || searchedItem.productName.equals(searchMessage))  {
+                    //searchedList.add(item)
+                    tempAdapter.addItem(searchedItem)
+                    flag = true
+                    Log.e("test","item BigClass = " + searchedItem.itemBigClass + ", searchMessage = " + searchMessage)
+                }
 
+            }
+            if(!flag) Toast.makeText(context ,"검색결과가 없습니다.", Toast.LENGTH_LONG).show()
+            else adapter = tempAdapter
+            adapter!!.notifyDataSetChanged()
+            recyclerView.setAdapter(adapter)
         }
     }
 }
