@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10sp"
                 android:text="상품 이름"
+                android:textColor="#000000"
                 android:textSize="18sp" />
 
             <TextView
@@ -41,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10sp"
                 android:text="상품 가격"
-                android:textSize="18sp" />
+                android:textColor="#000000"
+                android:textSize="15sp" />
 
         </LinearLayout>
 

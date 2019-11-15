@@ -74,8 +74,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
         }
 
         void onBind(Item item) {
-            productName.setText(item.getProductName()); //getItemName()이 더 적합..?
-            productPrice.setText(item.getItemPrice());
+            productName.setText(item.getItemName()); //getItemName()이 더 적합..?
+            productPrice.setText(item.getItemPrice()+"원");
             // imageView.setImageResource(item.getImgId());
             imageView.setImageResource(R.drawable.chrysanthemum);   //임시
         }
