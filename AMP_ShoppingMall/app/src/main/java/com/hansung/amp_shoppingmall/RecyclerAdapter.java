@@ -1,6 +1,7 @@
 package com.hansung.amp_shoppingmall;
 
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,13 +60,25 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
             productName = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productPrice);
             imageView = itemView.findViewById(R.id.imageView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent nextIntent = new Intent(v.getContext(), DetailActivity.class);
+                    nextIntent.putExtra("itemList", listData);
+                    nextIntent.putExtra("productName", ((TextView)(v.findViewById(R.id.productName))).getText().toString());
+                    v.getContext().startActivity(nextIntent);
+                }
+            });
+
         }
 
         void onBind(Item item) {
-            productName.setText(item.getProductName());
+            productName.setText(item.getProductName()); //getItemName()이 더 적합..?
             productPrice.setText(item.getItemPrice());
-           // imageView.setImageResource(item.getImgId());
+            // imageView.setImageResource(item.getImgId());
             imageView.setImageResource(R.drawable.chrysanthemum);   //임시
         }
+
     }
 }

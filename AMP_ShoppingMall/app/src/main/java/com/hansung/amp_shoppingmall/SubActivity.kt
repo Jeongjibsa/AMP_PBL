@@ -1,7 +1,9 @@
 package com.hansung.amp_shoppingmall
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +22,10 @@ class SubActivity : AppCompatActivity() {
         }
 
         val mAdapter = SecondRecyclerAdapter(this, itemList) { item ->
-            Toast.makeText(this, "테스트중입니다.", Toast.LENGTH_SHORT).show()
+            val nextIntent = Intent(this, DetailActivity::class.java)
+            nextIntent.putExtra("itemList", itemList)
+            nextIntent.putExtra("productName",item.productName)
+            startActivity(nextIntent)
         }
         mRecyclerView2.adapter = mAdapter
 
